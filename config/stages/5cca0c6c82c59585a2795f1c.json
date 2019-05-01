@@ -1,0 +1,17 @@
+{
+  "containerId": "5cc8b0e5cefb1b6101cc84fb",
+  "title": "Contract Setup",
+  "abiValidations": "$$LOOKUP",
+  "task": "$$LOOKUP",
+  "details": "$$LOOKUP",
+  "id": "5cca0c6c82c59585a2795f1c",
+  "type": "CodeStage",
+  "language": "solidity",
+  "languageVersion": "0.4.19",
+  "testFramework": "truffle_with_mocha",
+  "codeFileIds": [
+    "5cca0c6c82c59585a2795f1d",
+    "5cca0c6c82c59585a2795f1e"
+  ],
+  "position": 1
+}

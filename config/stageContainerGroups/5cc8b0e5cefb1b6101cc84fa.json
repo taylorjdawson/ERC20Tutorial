@@ -1,0 +1,9 @@
+{
+  "title": "ERC20 Token with Amberdata.io",
+  "id": "5cc8b0e5cefb1b6101cc84fa",
+  "containerType": "BuildingBlock",
+  "description": "Buidl an ERC20 token in solidity, deploy to mainnet, and view it on Amberdata!",
+  "thumbnailUrl": null,
+  "productionReady": null,
+  "estimatedTime": 120
+}
