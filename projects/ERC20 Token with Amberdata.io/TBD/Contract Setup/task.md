@@ -1,10 +1,8 @@
 ## Solidity Task
 
-Outline the things that need to be done in order to write a smart contract that passes all of the test cases.
+TODO .....
 
-You can write a list of actions like this:
-
-- Add a constructor
-- Add a `public` `address` member variable named `recipient`
-- Store the senders address as the initial recipient.
-
+1. Declare a [Solidity Pragma 0.5.0](?tab=details&scroll=Solidity%20Pragma)
+2. Import the `ERC20Interface`
+3. Declare the ERC20` contract
+4. Declare memeber variables

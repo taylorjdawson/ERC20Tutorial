@@ -35,5 +35,8 @@ Inside the interface we will define additional functions but will not include an
 # Contract Functions
 Within the `ERC20Interface` interface we are going to define 6 external functions
 
+TODO: Mention token symbol & name how having the interface ensures that we'll get a token symbol and name to appear when exchanges or etc ask for it
+
+
 # Contract Events
 TODO: ...explain

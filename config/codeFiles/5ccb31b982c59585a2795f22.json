@@ -4,9 +4,9 @@
   "testFixture": false,
   "stageContainerId": "5cc8b0e5cefb1b6101cc84fb",
   "codeStageIds": [
-    "5cca0c6c82c59585a2795f1c"
+    "5ccb31b982c59585a2795f20"
   ],
-  "id": "5cca0c6c82c59585a2795f1e",
+  "id": "5ccb31b982c59585a2795f22",
   "initialCode": "$$LOOKUP",
   "mode": "sol",
   "visible": true,

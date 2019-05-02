@@ -1,5 +1,4 @@
 ## Say Congratulations!
-TODO .....
 
 This is your chance to tell the user what a great job they did.
 

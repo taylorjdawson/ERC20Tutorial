@@ -1,0 +1,17 @@
+{
+  "containerId": "5cc8b0e5cefb1b6101cc84fb",
+  "title": "Contract Constructor",
+  "abiValidations": "$$LOOKUP",
+  "task": "$$LOOKUP",
+  "details": "$$LOOKUP",
+  "id": "5ccb31b982c59585a2795f20",
+  "type": "CodeStage",
+  "language": "solidity",
+  "languageVersion": "0.4.19",
+  "testFramework": "truffle_with_mocha",
+  "codeFileIds": [
+    "5ccb31b982c59585a2795f21",
+    "5ccb31b982c59585a2795f22"
+  ],
+  "position": 2
+}
