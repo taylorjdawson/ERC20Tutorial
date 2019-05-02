@@ -1,8 +1,5 @@
 pragma // TODO: declare version ^0.5.0
 
-contract  { //TODO: add contract name
-	
-	uint256 constant private MAX_UINT256 = 2**256 - 1; // <--- III need to explain this
+contract // TODO: declare contract and inherit imported interface
 
-	// TODO: create memeber variables
-}
+// TODO: declare member varriables

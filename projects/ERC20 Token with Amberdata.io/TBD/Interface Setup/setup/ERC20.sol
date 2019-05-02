@@ -1,7 +1,5 @@
-pragma solidity ^0.5.0;
+pragma // TODO: declare version ^0.5.0
 
-import "./ERC20Interface.sol";
+import // TODO: Import the interface 
 
-contract ERC20 is ERC20Interface {
-
-}
+contract // TODO: declare contract and inherit imported interface

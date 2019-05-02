@@ -1,26 +1,53 @@
-const ERC20Contract = artifacts.require('ERC20');
-console.log(ERC20Contract)
-// const errors = [
-//     "Make sure to declare a public mapping (address => uint256) 'balances' in your contract!",
-//     "Make sure to declare a public mapping (address => mapping (address => uint256)) 'allowed' in your contract!",
-//     "The arbiter address wasn't set to the expected value. It is the first argument passed into the constructor",
-// ]
-// contract('ERC20Contract', function ([_depositor]) {
-//     let contract;
-//     let _balances = null;
-//     let _allowed = null;
-//     before(async () => {
-//         contract = await ERC20Contract.new(_balances, _allowed, {
-//             from: _depositor,
-//             gasPrice: 0,
-//         });
-//     });
-//     describe('Contract Stage tests', function () {
-//         it('should declare a balances mapping', async function () {
-//             assert(contract.arbiter, errors[0]);
-//         });
-//         it('should declare an allowed mapping', async function () {
-//             assert(contract.depositor, errors[2]);
-//         });
-//     });
-// });
+const ERC20ContractABI = artifacts.require('ERC20').abi;
+
+console.log(ERC20ContractABI)
+
+const errors = [
+    "Make sure to declare an external function 'transfer' in your interface!",
+    "Make sure to declare an external function 'approve' in your interface!",
+    "Make sure to declare an external function 'transferFrom' in your interface!",
+    "Make sure to declare an external function 'totalSupply' in your interface!",
+    "Make sure to declare an external function 'balanceOf' in your interface!",
+    "Make sure to declare an external function 'allowance' in your interface!",
+    "Make sure to declare an event 'Transfer' in your interface!",
+    "Make sure to declare an event 'Approval' in your interface!",
+]
+
+const hasFunction = (abi, name) => {
+    return abi.filter(props => props.type === 'function' && props.name === name).length > 0
+}
+
+const hasEvent = (abi, name) => {
+    return abi.filter(props => props.type === 'event' && props.name === name).length > 0
+}
+
+
+contract('ERC20Contract', function ([creator]) {
+
+    describe('Contract Stage tests', function () {
+        it('should declare transfer function', async function () {
+            assert(hasFunction(ERC20ContractABI, 'transfer'), errors[0]);
+        });
+        it('should declare approve function', async function () {
+            assert(hasFunction(ERC20ContractABI, 'approve'), errors[1]);
+        });
+        it('should declare transferFrom function', async function () {
+            assert(hasFunction(ERC20ContractABI, 'transferFrom'), errors[2]);
+        });
+        it('should declare totalSupply function', async function () {
+            assert(hasFunction(ERC20ContractABI, 'totalSupply'), errors[3]);
+        });
+        it('should declare balanceOf function', async function () {
+            assert(hasFunction(ERC20ContractABI, 'balanceOf'), errors[4]);
+        });
+        it('should declare allowance function', async function () {
+            assert(hasFunction(ERC20ContractABI, 'allowance'), errors[5]);
+        });
+        it('should declare Transfer event', async function () {
+            assert(hasFunction(ERC20ContractABI, 'allowance'), errors[6]);
+        });
+        it('should declare Approval event', async function () {
+            assert(hasFunction(ERC20ContractABI, 'allowance'), errors[7]);
+        });
+    });
+});
