@@ -6,20 +6,21 @@ contract ERC20 {
     mapping (address => mapping (address => uint256)) public allowed;
     
     uint256 private _totalSupply;
+
     string public name;
     uint8 public decimals;
     string public symbol;
 
     constructor(
-        uint256 _initialAmount,
-        string memory _tokenName,
-        string memory _tokenSymbol,
-        uint8 _decimalUnits
+        uint256 initialAmount,
+        string memory tokenName,
+        string memory tokenSymbol,
+        uint8 decimalUnits
     ) public {
-        balances[msg.sender] = _initialAmount;
-        _totalSupply = _initialAmount;
-        name = _tokenName;
-        decimals = _decimalUnits;
-        symbol = _tokenSymbol;
+        balances[msg.sender] = initialAmount;
+        _totalSupply = initialAmount;
+        name = tokenName;
+        decimals = decimalUnits;
+        symbol = tokenSymbol;
     }
 }

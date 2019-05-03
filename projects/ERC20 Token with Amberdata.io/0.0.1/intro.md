@@ -10,6 +10,11 @@ TODO: Add more
 
 Otherwise, you are most likley familiar...
 
+## EIP-20
+[Ethereum Improvement Proposals](http://eips.ethereum.org/) (EIPs) describe standards for the Ethereum platform, including core protocol specifications, client APIs, and contract standards.
+
+EIP-20, formally adopted for Ethereum in September of 2017, defines a standard interface for tokens. 
+
 ## Why Amberdata.io?
 
 TODO: Add more 
