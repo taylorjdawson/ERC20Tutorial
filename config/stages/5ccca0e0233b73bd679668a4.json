@@ -1,0 +1,19 @@
+{
+  "containerId": "5cc8b0e5cefb1b6101cc84fb",
+  "title": "Contract Setup Part 2",
+  "abiValidations": "$$LOOKUP",
+  "task": "$$LOOKUP",
+  "details": "$$LOOKUP",
+  "id": "5ccca0e0233b73bd679668a4",
+  "type": "CodeStage",
+  "language": "solidity",
+  "languageVersion": "0.5.0",
+  "testFramework": "truffle_with_mocha",
+  "codeFileIds": [
+    "5ccca0e0233b73bd679668a5",
+    "5ccca0e0233b73bd679668a6"
+  ],
+  "position": 1,
+  "youtubeId": null,
+  "src": null
+}
