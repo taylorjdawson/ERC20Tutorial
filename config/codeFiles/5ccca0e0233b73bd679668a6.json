@@ -1,6 +1,6 @@
 {
   "executablePath": "contracts/contract.sol",
-  "name": "contract.sol",
+  "name": "ERC20.sol",
   "testFixture": false,
   "stageContainerId": "5cc8b0e5cefb1b6101cc84fb",
   "codeStageIds": [
@@ -11,5 +11,7 @@
   "mode": "sol",
   "visible": true,
   "executable": true,
-  "hasProgress": true
+  "hasProgress": true,
+  "fileLocation": null,
+  "readOnly": null
 }

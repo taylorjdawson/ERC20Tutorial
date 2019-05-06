@@ -23,4 +23,6 @@ contract ERC20 {
         decimals = decimalUnits;
         symbol = tokenSymbol;
     }
+
+    // TODO: Add contract functions
 }

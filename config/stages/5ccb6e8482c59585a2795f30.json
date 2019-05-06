@@ -1,6 +1,6 @@
 {
   "containerId": "5cc8b0e5cefb1b6101cc84fb",
-  "title": "Create Functions",
+  "title": "Contract Functions: Transfer",
   "abiValidations": "$$LOOKUP",
   "task": "$$LOOKUP",
   "details": "$$LOOKUP",
@@ -13,5 +13,7 @@
     "5ccb6e8482c59585a2795f31",
     "5ccb6e8482c59585a2795f32"
   ],
-  "position": 3
+  "position": 3,
+  "youtubeId": null,
+  "src": null
 }

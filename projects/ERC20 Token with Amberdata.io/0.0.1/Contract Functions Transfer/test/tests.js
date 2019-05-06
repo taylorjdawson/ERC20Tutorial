@@ -24,14 +24,44 @@ const typeOf = (propName) => {
 contract('ERC20Contract', function ([creator]) {
 
     let contract;
+    const initialAmount = 1000;
     const name = 'Shrute Buck';
     const decimals = 18;
     const symbol = 'SHUB';
 
     before(async () => {
-        contract = await ERC20Contract.new(name, decimals, symbol, {
+        contract = await ERC20Contract.new(initialAmount, name, symbol, decimals, {
             from: creator,
             gasPrice: 0,
+        });
+    });
+
+    describe('Contract Functions Stage tests', function () { 
+        it(`should set 'balances[msg.sender]' to ${initialAmount}`, async function () {
+            const _initialAmount = await contract.balances.call(creator);
+            assert.equal(_initialAmount, initialAmount, `'balances[msg.sender]' not intitialized to ${initialAmount}`);
+        });
+
+        
+
+    });
+
+    describe('Contract Constructor Stage tests', function () {
+        it(`should set 'balances[msg.sender]' to ${initialAmount}`, async function () {
+            const _initialAmount = await contract.balances.call(creator);
+            assert.equal(_initialAmount, initialAmount, `'balances[msg.sender]' not intitialized to ${initialAmount}`);
+        });
+        it(`should set 'name' to \'${name}\'`, async function () {
+            let _name = await contract.name.call();
+            assert.equal(_name, name, `'name' not intitialized to ${name}`);
+        });
+        it(`should set 'symbol' to \'${symbol}\'`, async function () {
+            let _symbol = await contract.symbol.call();
+            assert.equal(_symbol, symbol, `'symbol' not intitialized to ${symbol}`);
+        });
+        it(`should set 'decimals to \'${decimals}\'`, async function () {
+            let _decimals = await contract.decimals.call();
+            assert.equal(_decimals, decimals, `'decimals' not intitialized to ${decimals}`);
         });
     });
 

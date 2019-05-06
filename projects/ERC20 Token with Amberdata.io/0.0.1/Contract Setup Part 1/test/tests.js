@@ -1,19 +1,31 @@
 const ERC20Contract = artifacts.require('ERC20');
-console.log(ERC20Contract.ast.nodes)
-const errors = [
-    "Make sure to declare a public mapping (address => uint256) 'balances' in your contract!",
-    "Make sure to declare a public mapping (address => mapping (address => uint256)) 'allowed' in your contract!",
-]
+
+//TODO: Finish  Error codes
+
+const errors = {
+    NO_NAME_VAR: "variable 'name' has not been declared in contract",
+    NAME_WRONG_TYPE: "'name' is not of type 'string'",
+    NO_DECIMAL_VAR: "variable 'decimal' has not been declared in contract",
+    NO_SYMBOL_VAR: "variable 'symbol' has not been declared in contract",
+    SYMBOL_WRONG_TYPE: "'symbol' is not of type 'string'",
+    NO_TOTALSUPPLY_VAR: "variable 'totalSupply' has not been declared in contract",
+    TOTALSUPPLY_WRONG_TYPE: "'totalSupply' is not of type 'string'",
+}
+
+//TODO: Need add check for priv var
+
+const typeOf = (propName) => {
+    const prop = ERC20Contract.abi.filter(props => props.name === propName)
+    if (!prop[0] && !prop.outputs[0]) {return null}
+    return prop[0].outputs[0].type
+}
 
 contract('ERC20Contract', function ([creator]) {
 
     let contract;
-    const name = 'Shrute Buck';
-    const decimals = 18;
-    const symbol = 'SHUB';
 
     before(async () => {
-        contract = await ERC20Contract.new(name, decimals, symbol, {
+        contract = await ERC20Contract.new({
             from: creator,
             gasPrice: 0,
         });
@@ -21,13 +33,20 @@ contract('ERC20Contract', function ([creator]) {
 
     describe('Contract Setup Pt. 1 Stage tests', function () {
         it('should declare a variable \'name\'', async function () {
-
-
-            // assert.equal(await contract.name.call(), 'kjun')
-            assert.equal(typeof await contract.name.call(), 'string')
-            
-            assert(contract.name, errors[0]);
+            assert(contract.name, errors.NO_NAME_VAR);
+            assert.equal(typeof await contract.name.call(), 'string', errors.NAME_WRONG_TYPE);
+        });
+        it('should declare a variable \'decimals\'', async function () {
+            assert(contract.decimals, errors.NO_DECIMAL_VAR);
+            assert.equal(typeOf('decimals'), 'uint8')
+        });
+        it('should declare a variable \'symbol\'', async function () {
+            assert(contract.symbol, errors.NO_SYMBOL_VAR);
+            assert.equal(typeof await contract.symbol.call(), 'string', errors.SYMBOL_WRONG_TYPE);
+        });
+        it('should declare a variable \'totalSupply\'', async function () {
+            assert(contract.totalSupply, errors.NO_TOTALSUPPLY_VAR);
+            assert.equal(typeOf('totalSupply'), 'uint256', errors.TOTALSUPPLY_WRONG_TYPE);
         });
     });
-    
 });
