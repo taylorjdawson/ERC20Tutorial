@@ -1,0 +1,17 @@
+{
+  "containerId": "5cc8b0e5cefb1b6101cc84fb",
+  "title": "Functions Pt. 2",
+  "abiValidations": "$$LOOKUP",
+  "task": "$$LOOKUP",
+  "details": "$$LOOKUP",
+  "id": "5cd09ca814970f8e96844b97",
+  "type": "CodeStage",
+  "language": "solidity",
+  "languageVersion": "0.4.19",
+  "testFramework": "truffle_with_mocha",
+  "codeFileIds": [
+    "5cd09ca814970f8e96844b98",
+    "5cd09ca814970f8e96844b99"
+  ],
+  "position": 7
+}

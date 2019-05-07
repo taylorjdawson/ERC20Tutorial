@@ -1,6 +1,7 @@
 pragma solidity ^0.5.0;
 
 contract ERC20 {
+    uint256 constant private MAX_UINT256 = 2**256 - 1;
     mapping (address => uint256) public balances;
     mapping (address => mapping (address => uint256)) public allowed;
     
@@ -23,11 +24,7 @@ contract ERC20 {
         symbol = tokenSymbol;
     };
 
-    function transfer(address _to, uint256 _value) public returns (bool success) {
-        require(balances[msg.sender] >= _value);
-        balances[msg.sender] -= _value;
-        balances[_to] += _value;
-        emit Transfer(msg.sender, _to, _value); //solhint-disable-line indent, no-unused-vars
-        return true;
-    };
+    // TODO: add a function to transfer tokens
+
+    // TODO: add a function to check account balance
 }

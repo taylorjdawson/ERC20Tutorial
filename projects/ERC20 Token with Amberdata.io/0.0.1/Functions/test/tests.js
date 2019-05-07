@@ -30,7 +30,7 @@ const expectThrow = async (promise) => {
     assert(false, 'Expected throw not received');
 }
 
-contract('ERC20Contract', function ([creator, alice]) {
+contract('ERC20Contract', function ([creator, bob, alice]) {
 
     let contract;
     const initialAmount = 1000;
@@ -38,49 +38,62 @@ contract('ERC20Contract', function ([creator, alice]) {
     const decimals = 18;
     const symbol = 'SHUB';
 
-    before(async () => {
+    beforeEach(async () => {
         contract = await ERC20Contract.new(initialAmount, name, symbol, decimals, {
             from: creator,
             gasPrice: 0,
         });
     });
 
-    describe('Contract Functions Stage tests', function () { 
-        it(`should set 'balances[msg.sender]' to ${initialAmount}`, async function () {
-            const _initialAmount = await contract.balances.call(creator);
-            assert.equal(_initialAmount, initialAmount, `'balances[msg.sender]' not intitialized to ${initialAmount}`);
+    describe('Functions Stage tests', function () {
+        // it(`should return correct balance`, async function () {
+        //     const _balance = await contract.balanceOf.call(creator);
+        //     assert.equal(_balance, initialAmount, `'balanceOf' did not return correct balance`);
+        // });
+        // it(`should allow alice to spend 10 SHUBs on bob's behalf`, async function () {
+        //     const result = await contract.approve.call(alice, 100, {from: bob});
+        //     const _allowance = await contract.allowance.call(bob, alice);
+        //     assert.equal(_allowance, 10, `alice was not allowed the correct amount of SHUBs`);
+        // });
+
+        // Test that function fails if transfer is greater than holder balance
+        it(`should revert if 'value' to transfer is greater than the balance of the account`, async () => {
+            expectThrow(contract.transfer(bob, 1001))
         });
 
-        // Test that it throw if value is too great
-        it(`should throw if value is greater than what the account has`, async function () {
-            await contract.transfer.call(alice, 1001)
-            expectThrow()
+        // Test that function accurately subtracts from balance
+        it(`should transfer 100 SHUBs from contract creator to bob`, async () => {
+            await contract.transfer(bob, '100', {from: creator})
+            const creatorBalance = await contract.balanceOf(creator)
+            assert.equal(creatorBalance.toNumber(), 900, `'transfer' did not subtract the correct balance from contract creator`);
+            const bobBalance = await contract.balanceOf(bob)
+            assert.equal(bobBalance.toNumber(), 100, `'transfer' did not add the correct balance to bob's account`);
         });
 
-        // Test that funds are accurately subtracted
-
-        // Test that funds are accurately added
-
-        // Test that event is emmitted
+        it(`should return correct balance`, async () => {
+            await contract.transfer(bob, '100', { from: creator })
+            const bobBalance = await contract.balanceOf(bob)
+            assert.equal(bobBalance.toNumber(), 100, `'balanceOf' did not return the correct balance of bob's account`);
+        });
 
     });
 
     describe('Contract Constructor Stage tests', function () {
         it(`should set 'balances[msg.sender]' to ${initialAmount}`, async function () {
-            const _initialAmount = await contract.balances.call(creator);
-            assert.equal(_initialAmount, initialAmount, `'balances[msg.sender]' not intitialized to ${initialAmount}`);
+            const _initialAmount = await contract.balances(creator);
+            assert.equal(_initialAmount.toNumber(), initialAmount, `'balances[msg.sender]' not intitialized to ${initialAmount}`);
         });
         it(`should set 'name' to \'${name}\'`, async function () {
-            let _name = await contract.name.call();
+            let _name = await contract.name();
             assert.equal(_name, name, `'name' not intitialized to ${name}`);
         });
         it(`should set 'symbol' to \'${symbol}\'`, async function () {
-            let _symbol = await contract.symbol.call();
+            let _symbol = await contract.symbol();
             assert.equal(_symbol, symbol, `'symbol' not intitialized to ${symbol}`);
         });
         it(`should set 'decimals to \'${decimals}\'`, async function () {
-            let _decimals = await contract.decimals.call();
-            assert.equal(_decimals, decimals, `'decimals' not intitialized to ${decimals}`);
+            let _decimals = await contract.decimals();
+            assert.equal(_decimals.toNumber(), decimals, `'decimals' not intitialized to ${decimals}`);
         });
     });
 
