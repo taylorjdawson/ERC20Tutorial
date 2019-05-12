@@ -13,8 +13,6 @@ const errors = {
     NO_ALLOWED_VAR: "mapping 'allowed' has not been declared in contract"
 }
 
-//TODO: Need add type and visibility checks
-
 const typeOf = (propName) => {
     const prop = ERC20Contract.abi.filter(props => props.name === propName)
     if (!prop[0] && !prop.outputs[0]) { return null }

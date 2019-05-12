@@ -1,0 +1,13 @@
+[
+    {
+        "_id": "5cc8b0e5cefb1b6101cc84fb",
+        "constant": "nil",
+        "payable": "nil",
+        "error": "We could not find an external function transfer that accepts parameters 'to' of type address and 'from' of type uint256",
+        "task_display": "Declare an external function transfer that accepts parameters 'to' of type address and 'from' of type uint256",
+        "name": "transfer",
+        "inputs": [],
+        "outputs": [],
+        "interfaceType": "variable"
+    }
+]
