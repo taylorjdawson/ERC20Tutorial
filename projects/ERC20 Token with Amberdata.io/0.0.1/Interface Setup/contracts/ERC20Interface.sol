@@ -11,8 +11,6 @@ interface ERC20Interface {
 
     function transferFrom(address from, address to, uint256 value) external returns (bool);
 
-    function totalSupply() external view returns (uint256);
-
     function balanceOf(address who) external view returns (uint256);
 
     function allowance(address owner, address spender) external view returns (uint256);
@@ -21,4 +19,3 @@ interface ERC20Interface {
 
     event Approval(address indexed owner, address indexed spender, uint256 value);
 }
-

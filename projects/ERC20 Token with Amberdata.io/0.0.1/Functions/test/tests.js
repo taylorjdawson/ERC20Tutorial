@@ -62,7 +62,7 @@ contract('ERC20Contract', function ([creator, bob, alice]) {
         });
 
         // Test that function accurately subtracts from balance
-        it(`should transfer 100 SHUBs from contract creator to bob`, async () => {
+        it(`should transfer 100 SHUBs from contract creator's account to bob's account`, async () => {
             await contract.transfer(bob, '100', {from: creator})
             const creatorBalance = await contract.balanceOf(creator)
             assert.equal(creatorBalance.toNumber(), 900, `'transfer' did not subtract the correct balance from contract creator`);
