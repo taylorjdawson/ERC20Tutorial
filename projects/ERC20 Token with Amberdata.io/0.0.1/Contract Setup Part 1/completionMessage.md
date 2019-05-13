@@ -1,6 +1,2 @@
 ## Say Congratulations!
-TODO .....
-
-This is your chance to tell the user what a great job they did.
-
-And prep them for what's coming next! ;)
+Awesome! Let's head over to the next stage and finish up the contract.

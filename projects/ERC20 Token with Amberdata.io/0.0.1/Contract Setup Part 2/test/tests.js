@@ -37,9 +37,6 @@ contract('ERC20Contract', function ([creator]) {
         it('should declare a mapping \'balances\'', async function () {
             assert(contract.balances, errors.NO_BALANCES_VAR);
         });
-        it('should declare a mapping \'allowed\'', async function () {
-            assert(contract.allowed, errors.NO_ALLOWED_VAR);
-        });
     });
 
     describe('Contract Setup Pt. 1 Stage tests', function () {

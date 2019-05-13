@@ -28,8 +28,6 @@ const expectThrow = async (promise) => {
     assert(false, 'Expected throw not received');
 }
 
-const getEvent = (txnObject, event) => txnObject.logs.filter(log => log.event === event)[0];
-
 contract('ERC20Contract', function ([creator, bob, alice]) {
 
     let contract;
@@ -45,53 +43,34 @@ contract('ERC20Contract', function ([creator, bob, alice]) {
         });
     });
 
-    describe('Events Stage tests', function () {
-        // TODO: Tests that ->> Transfers of 0 values MUST be treated as normal transfers and fire the Transfer event.
-
-
-        it(`'approve' should emit a transfer event with correct values`, async () => {
-            const NUM_SHUBS = 200
-            const txnObject = await contract.approve(alice, NUM_SHUBS, { from: creator })
-            const event = getEvent(txnObject, 'Approval')
-            assert.isDefined(event, `'Approval' event not emitted`)
-            assert.equal(event.args[0], creator)
-            assert.equal(event.args[1], alice)
-            assert.equal(event.args[2], NUM_SHUBS)
-        });
-      
-
-        it(`'transfer' should emit a transfer event with correct values`, async () => {
-            const NUM_SHUBS = 200
-            const txnObject = await contract.transfer(alice, NUM_SHUBS, { from: creator })
-            const event = getEvent(txnObject, 'Transfer')
-            assert.isDefined(event, `'Transfer' event not emitted`)
-            assert.equal(event.args[0], creator)
-            assert.equal(event.args[1], alice)
-            assert.equal(event.args[2], NUM_SHUBS)
+    describe('Transfer From Stage tests', function () { 
+        it(`should revert transferFrom 'value' is greater than the balance of the account`, async () => {
+            expectThrow(contract.transferFrom(creator, bob, '10001', { from: creator }));
         });
 
-        it(`'transferFrom' should emit a transfer event with correct values`, async () => {
-            const NUM_SHUBS = 100
+        it(`should revert if msg.sender is not approved to transfer funds`, async () => {
+            expectThrow(contract.transferFrom(creator, bob, '50', { from: creator }));
+        });
+
+        it(`should transfer 100 SHUB from alice to bob`, async () => {
+
+            // Contract creator transfers alice 200 SHUBs
             let res = await contract.transfer(alice, 200, { from: creator });
-            await contract.approve(creator, NUM_SHUBS, { from: alice });
-            const txnObject = await contract.transferFrom(alice, bob, NUM_SHUBS, { from: creator });
 
-            const event = getEvent(txnObject, 'Transfer')
-            assert.isDefined(event, `'Transfer' event not emitted`)
-            assert.equal(event.args[0], alice)
-            assert.equal(event.args[1], bob)
-            assert.equal(event.args[2], NUM_SHUBS)
+            // Alice then approves the creator to transfer up to 100 SHUBs from her account
+            await contract.approve(creator, 100, { from: alice });
+
+            // Creator now transfers 50 SHUBS from alice's account to bob's account
+            await contract.transferFrom(alice, bob, 50, { from: creator });
+            const bobBalance = await contract.balanceOf(bob);
+            assert.equal(bobBalance.toNumber(), 50, `'transfer' did not add the correct balance to bob's account`);
         });
 
     });
 
-
     describe('Approval Stage Tests', function () {
         it('should declare a mapping \'allowed\'', async function () {
             assert(contract.allowed, errors.NO_ALLOWED_VAR);
-        });
-        it(`should revert if msg.sender is not approved to transfer funds`, async () => {
-            expectThrow(contract.transferFrom(creator, bob, '50', { from: creator }));
         });
         it(`should approve bob to transfer 100 SHUBs from alice's account`, async () => {
             await contract.approve(bob, 100, { from: alice });
@@ -99,22 +78,28 @@ contract('ERC20Contract', function ([creator, bob, alice]) {
         });
     });
 
-    describe('Functions Stage tests', function () {
+    describe('Transfer Stage tests', function () {
+
+        // Test that function fails if transfer is greater than holder balance
         it(`should revert if 'value' to transfer is greater than the balance of the account`, async () => {
-            expectThrow(contract.transfer(bob, 1001));
+            expectThrow(contract.transfer(bob, 1001))
         });
-        it(`should transfer 100 SHUBs from contract creator to bob`, async () => {
-            await contract.transfer(bob, '100', { from: creator });
-            const creatorBalance = await contract.balanceOf(creator);
+
+        // Test that function accurately subtracts from balance
+        it(`should transfer 100 SHUBs from contract creator's account to bob's account`, async () => {
+            await contract.transfer(bob, '100', { from: creator })
+            const creatorBalance = await contract.balanceOf(creator)
             assert.equal(creatorBalance.toNumber(), 900, `'transfer' did not subtract the correct balance from contract creator`);
-            const bobBalance = await contract.balanceOf(bob);
+            const bobBalance = await contract.balanceOf(bob)
             assert.equal(bobBalance.toNumber(), 100, `'transfer' did not add the correct balance to bob's account`);
         });
+
         it(`should return correct balance`, async () => {
-            await contract.transfer(bob, '100', { from: creator });
-            const bobBalance = await contract.balanceOf(bob);
+            await contract.transfer(bob, '100', { from: creator })
+            const bobBalance = await contract.balanceOf(bob)
             assert.equal(bobBalance.toNumber(), 100, `'balanceOf' did not return the correct balance of bob's account`);
         });
+
     });
 
     describe('Contract Constructor Stage tests', function () {

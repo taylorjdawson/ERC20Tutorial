@@ -10,6 +10,7 @@ const errors = {
     NO_BALANCES_VAR: "mapping 'balances' has not been declared in contract",
     NO_TOTALSUPPLY_VAR: "variable 'totalSupply' has not been declared in contract",
     TOTALSUPPLY_WRONG_TYPE: "'totalSupply' is not of type 'string'",
+    NO_ALLOWED_VAR: "mapping 'allowed' has not been declared in contract"
 }
 
 const typeOf = (propName) => {
@@ -18,7 +19,16 @@ const typeOf = (propName) => {
     return prop[0].outputs[0].type
 }
 
-contract('ERC20Contract', function ([creator]) {
+const expectThrow = async (promise) => {
+    try {
+        await promise;
+    } catch (err) {
+        return;
+    }
+    assert(false, 'Expected throw not received');
+}
+
+contract('ERC20Contract', function ([creator, bob, alice]) {
 
     let contract;
     const initialAmount = 1000;
@@ -26,35 +36,72 @@ contract('ERC20Contract', function ([creator]) {
     const decimals = 18;
     const symbol = 'SHUB';
 
-    before(async () => {
+    beforeEach(async () => {
         contract = await ERC20Contract.new(initialAmount, name, symbol, decimals, {
             from: creator,
             gasPrice: 0,
         });
     });
 
+    describe('Approval Stage Tests', function () {
+        it('should declare a mapping \'allowed\'', async function () {
+            assert(contract.allowed, errors.NO_ALLOWED_VAR);
+        });
+        it(`should approve bob to transfer 100 SHUBs from alice's account`, async () => {
+            await contract.approve(bob, 100, { from: alice });
+            assert.equal((await contract.allowance(alice, bob)).toNumber(), 100, `'approve' did not allow bob 100 SHUBs`)
+        });
+    });
+
+    describe('Transfer Stage tests', function () {
+
+        // Test that function fails if transfer is greater than holder balance
+        it(`should revert if 'value' to transfer is greater than the balance of the account`, async () => {
+            expectThrow(contract.transfer(bob, 1001))
+        });
+
+        // Test that function accurately subtracts from balance
+        it(`should transfer 100 SHUBs from contract creator's account to bob's account`, async () => {
+            await contract.transfer(bob, '100', { from: creator })
+            const creatorBalance = await contract.balanceOf(creator)
+            assert.equal(creatorBalance.toNumber(), 900, `'transfer' did not subtract the correct balance from contract creator`);
+            const bobBalance = await contract.balanceOf(bob)
+            assert.equal(bobBalance.toNumber(), 100, `'transfer' did not add the correct balance to bob's account`);
+        });
+
+        it(`should return correct balance`, async () => {
+            await contract.transfer(bob, '100', { from: creator })
+            const bobBalance = await contract.balanceOf(bob)
+            assert.equal(bobBalance.toNumber(), 100, `'balanceOf' did not return the correct balance of bob's account`);
+        });
+
+    });
+
     describe('Contract Constructor Stage tests', function () {
         it(`should set 'balances[msg.sender]' to ${initialAmount}`, async function () {
-            const _initialAmount = await contract.balances.call(creator);
-            assert.equal(_initialAmount, initialAmount, `'balances[msg.sender]' not intitialized to ${initialAmount}`);
+            const _initialAmount = await contract.balances(creator);
+            assert.equal(_initialAmount.toNumber(), initialAmount, `'balances[msg.sender]' not intitialized to ${initialAmount}`);
         });
         it(`should set 'name' to \'${name}\'`, async function () {
-            let _name = await contract.name.call();
+            let _name = await contract.name();
             assert.equal(_name, name, `'name' not intitialized to ${name}`);
         });
         it(`should set 'symbol' to \'${symbol}\'`, async function () {
-            let _symbol = await contract.symbol.call();
+            let _symbol = await contract.symbol();
             assert.equal(_symbol, symbol, `'symbol' not intitialized to ${symbol}`);
         });
         it(`should set 'decimals to \'${decimals}\'`, async function () {
-            let _decimals = await contract.decimals.call();
-            assert.equal(_decimals, decimals, `'decimals' not intitialized to ${decimals}`);
+            let _decimals = await contract.decimals();
+            assert.equal(_decimals.toNumber(), decimals, `'decimals' not intitialized to ${decimals}`);
         });
     });
 
     describe('Contract Setup Pt. 2 Stage tests', function () {
         it('should declare a mapping \'balances\'', async function () {
             assert(contract.balances, errors.NO_BALANCES_VAR);
+        });
+        it('should declare a mapping \'allowed\'', async function () {
+            assert(contract.allowed, errors.NO_ALLOWED_VAR);
         });
     });
 

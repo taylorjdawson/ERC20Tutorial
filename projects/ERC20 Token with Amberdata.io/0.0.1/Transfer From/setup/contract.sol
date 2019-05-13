@@ -3,10 +3,10 @@ pragma solidity ^0.5.0;
 contract ERC20 {
     uint256 constant private MAX_UINT256 = 2**256 - 1;
     mapping (address => uint256) public balances;
+
     mapping (address => mapping (address => uint256)) public allowed;
     
     uint256 public totalSupply;
-
     string public name;
     uint8 public decimals;
     string public symbol;
@@ -33,5 +33,15 @@ contract ERC20 {
 
     function balanceOf(address _owner) public view returns (uint256 balance) {
         return balances[_owner];
+    }
+
+     function approve(address _spender, uint256 _value) public returns (bool success) {
+        allowed[msg.sender][_spender] = _value;
+        emit Approval(msg.sender, _spender, _value);
+        return true;
+    }
+
+    function allowance(address _owner, address _spender) public view returns (uint256 remaining) {
+        return allowed[_owner][_spender];
     }
 }

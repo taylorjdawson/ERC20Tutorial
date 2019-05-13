@@ -10,10 +10,7 @@ const errors = {
     NO_BALANCES_VAR: "mapping 'balances' has not been declared in contract",
     NO_TOTALSUPPLY_VAR: "variable 'totalSupply' has not been declared in contract",
     TOTALSUPPLY_WRONG_TYPE: "'totalSupply' is not of type 'string'",
-    NO_ALLOWED_VAR: "mapping 'allowed' has not been declared in contract"
 }
-
-//TODO: Need add type and visibility checks
 
 const typeOf = (propName) => {
     const prop = ERC20Contract.abi.filter(props => props.name === propName)
@@ -45,16 +42,7 @@ contract('ERC20Contract', function ([creator, bob, alice]) {
         });
     });
 
-    describe('Functions Stage tests', function () {
-        // it(`should return correct balance`, async function () {
-        //     const _balance = await contract.balanceOf.call(creator);
-        //     assert.equal(_balance, initialAmount, `'balanceOf' did not return correct balance`);
-        // });
-        // it(`should allow alice to spend 10 SHUBs on bob's behalf`, async function () {
-        //     const result = await contract.approve.call(alice, 100, {from: bob});
-        //     const _allowance = await contract.allowance.call(bob, alice);
-        //     assert.equal(_allowance, 10, `alice was not allowed the correct amount of SHUBs`);
-        // });
+    describe('Transfer Stage tests', function () {
 
         // Test that function fails if transfer is greater than holder balance
         it(`should revert if 'value' to transfer is greater than the balance of the account`, async () => {

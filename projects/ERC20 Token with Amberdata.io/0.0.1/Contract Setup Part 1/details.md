@@ -29,16 +29,14 @@ Within this contract object we can define the specific functions and state of ou
 
 
 ## Contract State Variables
-Within the contract object, we are going to declare 7 [state variables](https://solidity.readthedocs.io/en/v0.5.8/structure-of-a-contract.html#state-variables).
-
-
-
-It should be noted that Solidity is a **statically typed language**. Therefore, when you declare any variable in Solidity, the type of the variable must be associated to the variable declaration. For the 3 parties described above, this can be accomplished with the following syntax:
-
+Within the contract object, we are going to declare 7 [state variables](https://solidity.readthedocs.io/en/v0.5.8/structure-of-a-contract.html#state-variables) using the following syntax:
 
 ```
 address public variableName;
 ```
+
+It should be noted that Solidity is a **statically typed language**. Therefore, when you declare any variable in Solidity, the type of the variable must be associated to the variable declaration.
+
 
 > Here, **address** is the variable type. The keyword **public** is a visibility specifier. More detail around visibility specifiers is provided on the next stage.
 

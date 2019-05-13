@@ -3,15 +3,13 @@ pragma solidity ^0.5.0;
 contract ERC20 {
     uint256 constant private MAX_UINT256 = 2**256 - 1;
     mapping (address => uint256) public balances;
+
     mapping (address => mapping (address => uint256)) public allowed;
     
     uint256 public totalSupply;
-
     string public name;
     uint8 public decimals;
     string public symbol;
-
-	// TODO: Declare events here
 
     constructor(
         uint256 initialAmount,
@@ -30,9 +28,6 @@ contract ERC20 {
         require(balances[msg.sender] >= _value);
         balances[msg.sender] -= _value;
         balances[_to] += _value;
-
-        // TODO: Add transfer event emitter 
-
         return true;
     }
 
@@ -44,9 +39,6 @@ contract ERC20 {
         if (allowance < MAX_UINT256) {
             allowed[_from][msg.sender] -= _value;
         }
-        
-        // TODO: Add transfer event emitter 
-
         return true;
     }
 
@@ -56,9 +48,6 @@ contract ERC20 {
 
      function approve(address _spender, uint256 _value) public returns (bool success) {
         allowed[msg.sender][_spender] = _value;
-        
-        // TODO: Add approve event emitter 
-
         return true;
     }
 

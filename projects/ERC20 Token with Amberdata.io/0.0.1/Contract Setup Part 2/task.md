@@ -1,8 +1,13 @@
 ## Solidity Task
 
-Outline the things that need to be done in order to write a smart contract that passes all of the test cases.
+For this stage we're going to create a couple of mappings (more info in [Details tab](?tab=details&scroll=Solidity%20Mappings)). 
 
-You can write a list of actions like this:
+These mappings will allow us to do two things:
+- record the number of ERC20 tokens that the user posseses, in other words the account balance
+- record how much an account is allowed to spend on behalf of another account
 
-1. Change
+Tasks to complete:
+
+1. Declare a `public` mapping, `address -> uint256`, named `balances`
+
 
