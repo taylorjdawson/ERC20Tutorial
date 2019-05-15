@@ -1,5 +1,3 @@
-## Say Congratulations!
+## You did it! 🤩
 
-This is your chance to tell the user what a great job they did.
-
-And prep them for what's coming next! ;)
+Everything should be all set to implement our last function. 👍

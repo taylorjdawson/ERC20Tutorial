@@ -1,5 +1,5 @@
-## Say Congratulations!
+## Awesome! 😃
 
-This is your chance to tell the user what a great job they did.
+We now have everything set up to begin implementing the actual behaviour of our contract. 
 
-And prep them for what's coming next! ;)
+Keep it up!

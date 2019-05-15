@@ -13,11 +13,8 @@ We declare mappings with the following syntax:
 mapping(keyType => valueType)
 ```
 
-`keyType` can be any soldidity built-in value types plus `bytes` and `string`. However, it can not be a user defined type.
+`keyType` can be any solidity built-in value types plus `bytes` and `string`. However, it can not be a user defined type.
 
 `valueType` can be any type, including mappings and defined types.
 
 Check out [the docs](https://solidity.readthedocs.io/en/v0.5.8/types.html#mapping-types) for more information about mappings.
-
-## Create Mapping
-Let's declare the `public` `balances` mapping that maps an `address` to a `uint256` value.

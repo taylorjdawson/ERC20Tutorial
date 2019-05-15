@@ -1,5 +1,5 @@
-## Say Congratulations!
+## Nice work! 🙌
 
-This is your chance to tell the user what a great job they did.
+Great! You just learned (or relearned) how to create a mapping in solidity. 
 
-And prep them for what's coming next! ;)
+Now that all of our variables are declared it's time for some action!

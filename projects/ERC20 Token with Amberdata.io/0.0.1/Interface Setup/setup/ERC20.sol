@@ -16,18 +16,18 @@ contract ERC20 /*inherit imported interface*/ {
 
     event Transfer(address indexed _from, address indexed _to, uint256 _value);
     event Approval(address indexed _owner, address indexed _spender, uint256 _value);
-
+    
     constructor(
-        uint256 initialAmount,
-        string memory tokenName,
-        string memory tokenSymbol,
-        uint8 decimalUnits
+        uint256 _totalSupply,
+        string memory _name,
+        string memory _symbol,
+        uint8 _decimals
     ) public {
-        balances[msg.sender] = initialAmount;
-        totalSupply = initialAmount;
-        name = tokenName;
-        decimals = decimalUnits;
-        symbol = tokenSymbol;
+        balances[msg.sender] = _totalSupply;
+        totalSupply = _totalSupply;
+        name = _name;
+        decimals = _decimals;
+        symbol = _symbol;
     }
 
     function transfer(address _to, uint256 _value) public returns (bool success) {

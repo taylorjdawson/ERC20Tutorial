@@ -1,5 +1,4 @@
-## Say Congratulations!
+## Nice you passed! 🎉
+Now we can move tokens around between accounts! 
 
-This is your chance to tell the user what a great job they did.
-
-And prep them for what's coming next! ;)
+Neat–O!

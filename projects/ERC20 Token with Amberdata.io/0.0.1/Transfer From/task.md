@@ -1,10 +1,6 @@
-## Solidity Task
+## Transfer from
 
-Outline the things that need to be done in order to write a smart contract that passes all of the test cases.
+In the last stage we created the ability to approve other addresses to transfer funds on the behalf of another address. In this stage we'll implement the function by which the funds can be transfered. 
 
-You can write a list of actions like this:
-
-- Add a constructor
-- Add a `public` `address` member variable named `recipient`
-- Store the senders address as the initial recipient.
-
+Tasks to complete: 
+- Implement a  `public` `transferFrom` function that takes a parameter `_from` of type `address`, `_to` of type `address`, `_value` of type `uint256`, and returns a `bool` named `success`.

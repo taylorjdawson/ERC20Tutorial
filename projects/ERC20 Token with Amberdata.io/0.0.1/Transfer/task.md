@@ -1,10 +1,11 @@
-## Solidity Task
+## Transfer
 
-Outline the things that need to be done in order to write a smart contract that passes all of the test cases.
+Now that we have *everything* we can start implementing methods. By the end of this stage we'll be able to transfer funds between accounts and view the balances of accounts.
 
-You can write a list of actions like this:
+Let's get going!
 
-- Add a constructor
-- Add a `public` `address` member variable named `recipient`
-- Store the senders address as the initial recipient.
+Tasks to complete this stage:
 
+1. Implement a `public` function named `transfer` that returns a `boolean` named `success` and takes two parameters `_to` and `_value`. It should transfer funds from one account to another and record it properly in the `balances` mapping.
+
+2. Implement a `public` `view` function named `balanceOf` that returns a `uint256` named `balance`

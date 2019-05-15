@@ -1,10 +1,17 @@
-## Solidity Task
+## Solidity Events
+It's time for some new material! Events are not required but are absolutely recommended when developing dApps. They allow applications to subscribe and listen to these events through the RPC interface of an Ethereum client or with an API provider such as [Amberdata's Websockets](https://docs.amberdata.io/reference/overview).
 
-Outline the things that need to be done in order to write a smart contract that passes all of the test cases.
 
-You can write a list of actions like this:
+Tasks to complete this stage:
 
-- Add a constructor
-- Add a `public` `address` member variable named `recipient`
-- Store the senders address as the initial recipient.
+1. Declare a `Transfer` event which has 3 parameters: 
+    - an `indexed` param, `_from` of type `address`
+    - an `indexed` param, `_to` of type `address`
+    - `_value` of type `uint256`
+2. Declare an `Approval` event which has 3 parameters: 
+    - an `indexed` param, `_owner` of type `address`
+    - an `indexed` param, `_spender` of type `address`
+    - `_value` of type `uint256`
+3. Emit the `Transfer` event in the `transfer` & `transferFrom` function
+4. Emit the `Approval` event in the `approve` function
 

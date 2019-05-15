@@ -1,5 +1,5 @@
-## Say Congratulations!
+## Great job! 🤘
 
-This is your chance to tell the user what a great job they did.
+You've implemented every function that we'll need for our token.
 
-And prep them for what's coming next! ;)
+Pat yourself on the back!

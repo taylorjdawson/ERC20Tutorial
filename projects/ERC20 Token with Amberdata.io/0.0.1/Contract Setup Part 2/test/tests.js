@@ -10,7 +10,6 @@ const errors = {
     NO_BALANCES_VAR: "mapping 'balances' has not been declared in contract",
     NO_TOTALSUPPLY_VAR: "variable 'totalSupply' has not been declared in contract",
     TOTALSUPPLY_WRONG_TYPE: "'totalSupply' is not of type 'string'",
-    NO_ALLOWED_VAR: "mapping 'allowed' has not been declared in contract"
 }
 
 const typeOf = (propName) => {

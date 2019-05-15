@@ -29,16 +29,16 @@ Within this contract object we can define the specific functions and state of ou
 
 
 ## Contract State Variables
-Within the contract object, we are going to declare 7 [state variables](https://solidity.readthedocs.io/en/v0.5.8/structure-of-a-contract.html#state-variables) using the following syntax:
+Within the contract object, we are going to declare 4 [state variables](https://solidity.readthedocs.io/en/v0.5.8/structure-of-a-contract.html#state-variables) using the following syntax:
 
 ```
-address public variableName;
+type visibility variableName;
 ```
 
 It should be noted that Solidity is a **statically typed language**. Therefore, when you declare any variable in Solidity, the type of the variable must be associated to the variable declaration.
 
+The visibility specifier is in some ways a form of access control. For more information refer to the Solidity docs on [Visibility and Getters](https://solidity.readthedocs.io/en/v0.5.8/contracts.html#visibility-and-getters)
 
-> Here, **address** is the variable type. The keyword **public** is a visibility specifier. More detail around visibility specifiers is provided on the next stage.
 
 These definitions will inform the smart contract that these variables are in fact Ethereum addresses on the blockchain and enable those addresses to interact with the smart contract based on the constraints we program into the contract.
 
